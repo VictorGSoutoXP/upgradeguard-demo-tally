@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      checks: write # publishes the SIMD-0500 compatibility check
     steps:
       - uses: actions/checkout@v4
         with:
