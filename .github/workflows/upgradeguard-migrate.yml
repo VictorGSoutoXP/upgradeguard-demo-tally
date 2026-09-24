@@ -19,8 +19,8 @@ jobs:
       - id: migrate
         uses: VictorGSoutoXP/UpgradeGuard/action/migrate@main
 
-  # Pull requests opened with the default GITHUB_TOKEN do not start other
-  # workflows, so the evidence for the migration branch is built here.
+  # Workflows on a pull request opened by github-actions[bot] wait for a
+  # maintainer's approval, so the evidence for the migration branch is built here.
   evidence:
     needs: migrate
     if: needs.migrate.outputs.branch != ''
