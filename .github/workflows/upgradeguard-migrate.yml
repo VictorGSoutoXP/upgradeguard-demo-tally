@@ -1,0 +1,39 @@
+# Opens the sBPF v3 migration pull request, then builds the migrated branch and
+# publishes the compatibility evidence. A human reviews and merges the PR.
+name: UpgradeGuard migration
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.migrate.outputs.branch }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: migrate
+        uses: VictorGSoutoXP/UpgradeGuard/action/migrate@main
+
+  # Pull requests opened with the default GITHUB_TOKEN do not start other
+  # workflows, so the evidence for the migration branch is built here.
+  evidence:
+    needs: migrate
+    if: needs.migrate.outputs.branch != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.migrate.outputs.branch }}
+      - uses: VictorGSoutoXP/UpgradeGuard/action@main
+        with:
+          program-name: tally
+          program-id: C6AC67E3kLs1iK7Wj7G7AzVFEkjyf14uXuBFFt6V49mp
+          cluster: devnet
+          fixtures: tests/upgradeguard/fixtures.json

@@ -1,0 +1,14 @@
+[toolchain]
+anchor_version = "0.30.1"
+solana_version = "1.18.26"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+tally = "C6AC67E3kLs1iK7Wj7G7AzVFEkjyf14uXuBFFt6V49mp"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"

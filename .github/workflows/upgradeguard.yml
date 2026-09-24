@@ -1,0 +1,21 @@
+# SIMD-0500 compatibility evidence for pull requests. Read-only: no deploy, no keys.
+name: UpgradeGuard
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sbpf-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: VictorGSoutoXP/UpgradeGuard/action@main
+        with:
+          program-name: tally
+          program-id: C6AC67E3kLs1iK7Wj7G7AzVFEkjyf14uXuBFFt6V49mp
+          cluster: devnet
+          fixtures: tests/upgradeguard/fixtures.json

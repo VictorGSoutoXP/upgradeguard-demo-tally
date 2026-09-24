@@ -1,0 +1,150 @@
+{
+  "program_id": "C6AC67E3kLs1iK7Wj7G7AzVFEkjyf14uXuBFFt6V49mp",
+  "accounts": {
+    "authority": {
+      "lamports": 1000000000
+    },
+    "intruder": {
+      "lamports": 1000000000
+    },
+    "tally": {
+      "lamports": 1500000,
+      "owner": "program",
+      "data": "hex:7e0b1d212065ef19755ea77f4d69b7c525466a08c0a5e9b23e390cbdc1e050244bedfeef2b22707c05000000000000006400000000000000"
+    }
+  },
+  "cases": [
+    {
+      "name": "initialize",
+      "transactions": [
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "new_tally",
+                  "writable": true,
+                  "signer": true
+                },
+                {
+                  "name": "authority",
+                  "writable": true,
+                  "signer": true
+                },
+                {
+                  "name": "11111111111111111111111111111111"
+                }
+              ],
+              "data": "hex:afaf6d1f0d989bed6400000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "increment",
+      "transactions": [
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "tally",
+                  "writable": true
+                },
+                {
+                  "name": "authority",
+                  "signer": true
+                }
+              ],
+              "data": "hex:0b12680968ae3b210700000000000000"
+            }
+          ]
+        },
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "tally",
+                  "writable": true
+                },
+                {
+                  "name": "authority",
+                  "signer": true
+                }
+              ],
+              "data": "hex:0b12680968ae3b211e00000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "limit exceeded",
+      "transactions": [
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "tally",
+                  "writable": true
+                },
+                {
+                  "name": "authority",
+                  "signer": true
+                }
+              ],
+              "data": "hex:0b12680968ae3b216000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "reset",
+      "transactions": [
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "tally",
+                  "writable": true
+                },
+                {
+                  "name": "authority",
+                  "signer": true
+                }
+              ],
+              "data": "hex:1751fb548ab7f0d6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "reset by another signer",
+      "transactions": [
+        {
+          "instructions": [
+            {
+              "accounts": [
+                {
+                  "name": "tally",
+                  "writable": true
+                },
+                {
+                  "name": "intruder",
+                  "signer": true
+                }
+              ],
+              "data": "hex:1751fb548ab7f0d6"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
